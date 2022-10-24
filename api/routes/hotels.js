@@ -1,5 +1,7 @@
 import express from "express";
 const router = express.Router();
+import { verifyAdmin } from "../utils/verifyToken.js";
+
 import {
   createHotel,
   getAllHotels,
@@ -8,13 +10,13 @@ import {
   deleteHotel,
 } from "../controllers/hotel.js";
 ///CREATE HOTEL
-router.post("/", createHotel);
+router.post("/", verifyAdmin, createHotel);
 
 ///UPDATE HOTEL
-router.put("/:id", updateHotel);
+router.put("/:id", verifyAdmin, updateHotel);
 
 ///DELETE HOTEL
-router.delete("/:id", deleteHotel);
+router.delete("/:id", verifyAdmin, deleteHotel);
 
 ///GET HOTEL
 router.get("/:id", getHotel);
